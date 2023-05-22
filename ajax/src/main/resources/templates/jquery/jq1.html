@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+    <script th:src="@{/js/jquery-3.6.3.js}"></script> 
+    <script>
+        //document 자바스크립트의 document 객체= 현재 페이지
+        //ready라는 함수 = 괄호안의 함수를 페이지가 로딩되자 마자 실행시켜라
+        $(document).ready(function(){
+            //alert('jquery 실행됨');
+            $('p').css('color','green'); //현재페이지에 p태그 사용한걸 파란색으로 바꾼다
+            $('p.blue').css('color','blue');
+            $('.blue').css('color','blue'); //이래 넣으면 둘다 바뀜
+            $('#red').css('color','red');
+            //다 일단 그린으로 칠해준다음에 내려오면서 바뀐다고 생각해라
+            $('h2,h3,h4').css('color','yellow');
+            $('div p').css('color','pink');
+            $('input[type=password]').css('background','gold');
+            //$('input:password').css('background','gold');
+        });
+    </script>
+</head>
+<body>
+    <h1>[ jQuery 사용 ]</h1>
+    <p class="blue">jQuery 사용하기 연습입니다.</p>
+    <p>jQuery 사용하기 연습입니다.</p>
+    <p>jQuery 사용하기 연습입니다.</p>
+    <p id="red">jQuery 사용하기 연습입니다.</p>
+    <h2 class="blue">h2 태그</h2>
+    <h3>h3태그</h3>
+    <h4>h4태그</h4>
+    <div>
+        <p>div태그 내의 p태그</p>
+    </div>
+    <form>
+        <input type="text">
+        <input type="password" class="password">
+        <input type="submit">
+    </form>
+</body>
+</html>

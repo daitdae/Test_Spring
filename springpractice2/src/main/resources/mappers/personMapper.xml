@@ -1,0 +1,31 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.softsociety.springpractice2.dao.PersonDAOPr">
+
+	<insert id="insertPersonPr" parameterType="PersonPr">
+		INSERT INTO personPr VALUES(#{idnum},#{name},#{age})
+	</insert>
+	
+	<delete id="deletePersonPr" parameterType="String">
+		DELETE FROM personPr WHERE idnum=#{idnum}
+	</delete>
+	
+	<delete id="delete2PersonPr" parameterType="String">
+		DELETE FROM personPr WHERE name LIKE'%'||#{name}||'%'
+	</delete>
+	
+	<select id="selectOnePr" parameterType="String" resultType="PersonPr">
+		SELECT * FROM personPr WHERE idnum = #{idnum}
+	</select>
+	
+	<select id="selectPr" resultType="PersonPr">
+		SELECT * FROM personPr
+	</select>
+	
+	<update id="updatePersonPr" parameterType="PersonPr">
+		UPDATE personPr SET name=#{name}, age=#{age} WHERE idnum=#{idnum}
+	</update>
+
+</mapper>

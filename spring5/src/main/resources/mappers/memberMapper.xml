@@ -1,0 +1,57 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.softsociety.spring5.dao.MemberDAO">
+
+	<insert id="insert" parameterType="Member">
+		INSERT INTO 
+			spring5_member(
+				memberid
+				, memberpw
+				, membername
+				, email
+				, phone
+				, address
+			)
+		VALUES (
+				#{memberid}
+				, #{memberpw}
+				, #{membername}
+				, #{email}
+				, #{phone}
+				, #{address}
+			)
+	</insert>
+	
+	<select id="select" parameterType="String" resultType="Member">
+		SELECT * FROM
+			spring5_member 
+		WHERE
+			memberid = #{memberid}
+	</select>
+	
+	<update id="update" parameterType="Member">
+		UPDATE
+			spring5_member
+		SET
+			membername = #{membername}
+			,email = #{email}
+			,phone = #{phone}
+			,address = #{address}
+		<if test="memberpw !=null and memberpw !=''">
+			,memberpw = #{memberpw}
+		</if>
+		WHERE
+			memberid = #{memberid}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM 
+			spring5_member 
+		WHERE 
+			memberid = #{memberid}
+	</delete>
+	
+	
+</mapper>

@@ -1,0 +1,45 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.softsociety.spring4.dao.GuestbookDAO">
+
+	<insert id="insert" parameterType="Guestbook">
+		INSERT INTO 
+			guestbook 
+			(
+				num
+				 ,name
+				 ,password
+				 ,contents
+			)
+		VALUES 
+			(
+				guestbook_seq.nextval
+				, #{name}
+				, #{password}
+				, #{contents}
+			)
+	</insert>
+	
+	<!-- select로 읽었을때 나오는 한줄을 resulttype으로(guestbook이라는 객체로) or map  select 명령을 실행하면 guestbook이라는 객체로 받아달라는 뜻
+		파라미터 타입 왜 없는지 못들음 다시 듣기-->
+	<select id="list" resultType="Guestbook"> 
+		SELECT 
+			* 
+		FROM 
+			guestbook
+		ORDER BY
+			num DESC
+	</select>
+	
+	<delete id="delete" parameterType="Guestbook">
+		DELETE
+		FROM
+			guestbook
+		WHERE
+			num=#{num} and password=#{password}
+	</delete>
+		
+
+</mapper>

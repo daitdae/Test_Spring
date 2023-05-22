@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http:www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+    <script th:src="@{/js/jquery-3.6.3.js}"></script> 
+    <script>
+        $(document).ready(function(){
+            //이벤트 연결
+            //들어오자마자 buttonClick() 함수가 실행하도록 할때
+            //$('#button1') //button1의 객체를 의미함
+            $('#button1').on('click',buttonClick);
+            // $('#button1').click(buttonClick); 위에거랑 같은거임
+            //on() 괄호안에 뭘 넣느냐에 따라 이벤트 종류가 달라진다
+            $('#button2').on('click', buttonOff);
+            $('#button3').on('click', buttonOn);
+            $('#button4').on('click',buttonTrigger);
+
+            //일회용 함수 밑에 함수 따로 만들 필요없이 한번만 쓰고 말것
+            $('#button5').on('click', function(){
+                //3초간격으로 버튼 1을 계속 누르는 함수
+                setTimeout(function(){
+                    $('#button1').trigger('click');
+                },3000);
+            });
+
+            //마우스를 올렸을때 처리
+            $('#img1, #img2').on('mouseenter',function(){
+                //this는 이벤트가 발생한 객체 여기선 ('#img1','#img2')
+                $(this).css('width' ,200);
+                $(this).css('height' ,200);
+                //$(this).css('width' ,200).css('height' ,200); 이것도 가능
+            });
+
+            //마우스가 떠났을때 처리
+            $('#img1, #img2').on('mouseleave',function(){
+                $(this).css('width' ,300);
+                $(this).css('height' ,300);
+            });
+
+            //그림 크기 알아내서 크기 바꿀때
+            $('#img1, #img2').on('mouseenter',function(){
+                let w = $(this).width();
+                let h = $(this).height();
+                //alert(w + ":" + h); 
+                $(this).css('width',w*2);
+                $(this).css('height',h*2);
+            });
+
+            //이미지를 클릭하면 현재 크기보다 10px 씩 점점 커지게 하는 코드
+            $('#img3').on('click',function(){
+                let w = $(this).width();
+                let h = $(this).height();
+                $(this).css('width',w+10);
+                $(this).css('height',h+10);
+            });
+
+            //현재 페이지의 모든 입력란에 포커스가 가게되면 배경색을 핑크색으로 한다
+    
+        });
+
+        function buttonClick(){
+            alert('button1클릭함');
+        }
+        function buttonOff(){
+            //이벤트 기능을 없애는 방법
+            //세가지 방법중 하나를 골라서 쓰면 됨
+            $('#button1').off(); //이벤트 다없애는것
+            //$('#button1').off('click'); //클릭이벤트에 연결된 것만 취소
+            //$('#button1').off('click',buttonClick); //클릭이벤트에
+        }
+        function  buttonOn(){
+            $('#button1').on('click',buttonClick); //다시 기능 생김
+        }
+
+        function buttonTrigger(){   
+            //버튼4를 눌렀을때 버튼 1이 클릭된 효과
+            $('#button1').trigger("click");
+        }
+    </script>
+</head>
+<body>
+    <h1>[ 이벤트 ]</h1> <!--p.245 7장 이벤트-->
+    <!-- 이벤트를 발생시키기 위해 3가지가 필요 이름, 종류, 실제처리부분 -->
+    <p><input type="button" value="button1" id="button1"></p>
+    <p><input type="button" value="이벤트 연결 해제" id="button2"></p>
+    <p><input type="button" value="이벤트 연결" id="button3"></p>
+    <p><input type="button" value="이벤트 강제 발생" id="button4"></p>
+    <p><input type="button" value="일정 시간 후에 이벤트 강제 발생" id="button5"></p>
+    <p><input type="button" value="일정 시간 간격으로 이벤트 강제 발생" id="button6"></p>
+    ㄱ: <input type="text" class="text"> 
+    ㄴ: <input type="text" class="text"> 
+    ㄷ: <input type="text" class="text"> 
+    ㄹ: <input type="text" class="text"> 
+
+    <p><img th:src="@{/images/img1.jpg}" id="img1"></p>
+    <p><img th:src="@{/images/img2.jpg}" id="img2"></p>
+    <p><img th:src="@{/images/img3.jpg}" id="img3"></p>
+   
+    
+    
+</body>
+</html>

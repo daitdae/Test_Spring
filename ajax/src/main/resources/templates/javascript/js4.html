@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[ Ajax ]</title>
+    <script>
+        function calc(){
+            let x = document.getElementById('num1');
+            let y = document.getElementById('num2');
+
+            let result = parseFloat(x.value)+parseFloat(y.value);
+            document.getElementById("result").value = result;
+        }
+    </script>
+</head>
+<body>
+    <h1>[ Js4 ]</h1>
+
+    <h2>계산기</h2>
+    <input type="text" id="num1" name="num1">
+
+    <input type="button" id="plus" name="plus" onclick="calc()" value="+">
+
+    <input type="text" id="num2" name="num2">
+
+    <span>=</span>
+
+    <input type="text" id="result" name="result" readonly>
+   
+       
+</body>
+</html>

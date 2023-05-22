@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;spring1-1/src/main/resources/templates/Practice.html&apos; to &apos;index.html&apos;" description="Rename resource &apos;Practice.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/templates/Practice.html" name="index.html" stamp="1672628807131" updateReferences="true"/>
+</session>

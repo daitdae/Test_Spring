@@ -1,0 +1,31 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.softsociety.springpractice4.dao.GuestbookDAOPr">
+
+	<insert id="insert" parameterType="GuestbookPr">
+		INSERT INTO 
+    		guestbookPr(num, name, password, contents)
+		VALUES
+  		   (guestbookPr_seq.nextval, #{name}, #{password}, #{contents})
+	</insert>
+	
+	<select id="list" resultType="GuestbookPr">
+		SELECT
+			*
+		FROM
+			guestbookPr
+		ORDER BY
+			num DESC
+	</select>
+	
+	<delete id="delete" parameterType="GuestbookPr">
+		DELETE 
+		FROM
+			guestbookPr
+		WHERE
+			num=#{num} and password=#{password}
+	</delete>
+
+</mapper>

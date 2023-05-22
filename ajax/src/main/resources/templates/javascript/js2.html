@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[ Ajax ]</title>
+    <script>
+        function test1(){
+            console.log('a =' + a);
+            //console.log('b =' + b);
+            //console.log('c =' + c);
+            
+            var a = 1;  //밑에서 선언을 해도 위에서 막 가져다 씀 다만 변수값은 들어가지 않음
+            let b = 2;  //그냥 에러남
+            const c = 3; //const는 처음 선언한 값 이외에 다른 값이 들어올수 없다
+            
+            console.log('a =' + a);
+            console.log('b =' + b);
+            console.log('c =' + c);
+
+            var a = 4;  //재선언 가능 
+            //let b = 5;  //있는 변수 다시 선언 할 수 없음(재선언 불가)
+            //const c = 6; //있는 변수 다시 선언 할 수 없음(재선언 불가)
+
+            console.log('a =' + a);
+            console.log('b =' + b);
+            console.log('c =' + c);
+
+            a=7;
+            b=8;
+            //c=9;    //변수는 그대로 있는데 다른 값 할당이 안됨 (재할당 불가)
+        }
+
+        function test2(){
+            let a = 10;
+            let b = "12.3";
+            let c = "abcd";
+
+            console.log(typeof(a)); //괄호안에 있는 타입을 확인할 수 있음
+            console.log(typeof(b));
+            console.log(a + 3); //숫자니깐 그냥 더함
+            console.log(b + 3); //문자열 뒤에 3가져다 붙임
+            console.log(a + Number(b)); //숫자로 바꿔줌
+
+            console.log(isNaN(a));  //숫자가 아니냐 라고 물어보는것
+            console.log(isNaN(b));  //숫자로 변환을 할 수 있기 때문에 false가 나옴
+            console.log(isNaN(c));  //숫자가 아닌 문자기 때문에 true라고 나옴
+        }
+
+        function test3(){
+            alert('alert');
+
+            let res = confirm('confirm'); //내가 입력한 내용이 대화상자에 뜸
+            console.log(res);
+
+            let str = prompt('prompt'); //입력하는 창이 뜸 무조건 스트링으로 뜸
+            console.log(str);
+        }
+
+    </script>
+</head>
+<body>
+    <header>
+        <h1>[ 기본문법 ]</h1>
+    </header>
+   <section>
+        <p><a href="javascript:test1()">변수선언</a></p>
+        <p><a href="javascript:test2()">자료형</a></p>
+        <p><a href="javascript:test3()">대화상자</a></p>
+        <div></div>
+   </section>
+
+   
+       
+</body>
+</html>

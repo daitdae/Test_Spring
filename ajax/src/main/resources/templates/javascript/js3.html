@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[ Js3 ]</title>
+    <script>
+        let win = null; //win을 쓰기위해 미리 선언해둠
+
+        function test1(){
+            //속성넣을때 빈칸없이 쉽표해주면서 넣기
+            win = window.open('','w','left=300,top=100,width=500,location=yes');
+        }
+        function test2(){
+            //열려 있으면 닫아라
+            if(win != null && !win.closed){
+                win.close();
+            }
+        }
+        function test3(){   //노션참조하기
+            //win이 null이 아니고 창이 열려있으면
+            //창 크기의 위치 변경하고 맨 앞으로 활성화
+            win = window.open('','w','width=100,height=200;','');
+            if(win !=null && !win.closed){
+                window.resizeTo(700,800);
+                win.focus();
+            }
+        }
+
+        function test4(){   //screen은 메소드도 아니고 속성임
+            let w = screen.width;
+            let h = screen.height;
+            alert('가로:' +w+ ',세로: ' + h); //띄어쓰기 조심하자
+        }
+
+        function test5(){
+            alert(location.href); //현재 읽고 있는 주소가 나옴(현재경로)
+            location.href = 'http://www.naver.com' //다른 사이트로 이동, alert시행 이후 이동되어짐
+        }
+
+        function test6(){
+            history.go(-1); //바로 전 화면으로 돌아감 -뒤에 숫자 바꿔주면 될듯
+        }
+        function test7(){
+            alert(navigator.userAgent);
+            //match 함수는 특정 텍스트 안에 검색할 단어, 찾고 싶은 단어가 있는경우 텍스트 줘서 확인
+            //str.match('단어');
+            let n = navigator.userAgent;
+            if(n.match('Apple')){    
+                location.href='http://www.naver.com'
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>[ 객체 ]</h1>
+    </header>
+    <section>
+        <p><a href="javascript:test1()">window 객체 - 창 열기</a></p>
+        <p><a href="javascript:test2()">window 객체 - 창 닫기</a></p>
+        <p><a href="javascript:test3()">window 객체 - 창 크기, 위치변경</a></p>
+        <p><a href="javascript:test4()">screen 객체</a></p>
+        <p><a href="javascript:test5()">location 객체</a></p>
+        <p><a href="javascript:test6()">history 객체</a></p>
+        <p><a href="javascript:test7()">navigator 객체</a></p>
+    </section>
+   
+       
+</body>
+</html>

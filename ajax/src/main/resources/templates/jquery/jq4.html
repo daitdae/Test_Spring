@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http:www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+    <script th:src="@{/js/jquery-3.6.3.js}"></script> 
+    <script>
+        
+        //이미지 파일을 배열에 넣어놓고 0번이미지에서 1번이미지보여주게  
+        //처음에 0번에 이미지 박아놓음
+        //현재 사용한 배열 요소 인덱스
+        //클릭할때마다 더하기 1해서 배열에서 attr해서 뽑아오게
+        //배열의 크기 -1 마지막 수업 다시 듣기
+        $(document).ready(function(){
+            //버튼을 누르면 뭐가 실행되는지 $('#bt1').on('click', function(){});
+
+            //html함수 더 많이 쓰임 객체가 여러개일때 배열 맨앞에것만 처리
+            $('#bt1').on('click', function(){
+                let s = $('h3').html();
+                console.log(s);
+
+                $('h3').each(function(i,ob){
+                    console.log(ob);
+                });
+            });
+
+            //text 함수
+            $('#bt2').on('click',function(){
+                let s = $('h3').text();
+                console.log(s);
+            });
+
+            $('#bt3').on('click',function(){
+                //value속성을 읽어간다는 말
+                //내가 텍스트 창에 입력한 말을 출력해준다
+                //id가 text1인 객체 = $('#text1')
+                let s = $('#text1').val();
+                console.log(s);
+            });
+
+            $('#bt4').on('click',function(){
+                //h3 태그들의 문자열이 바뀐다
+                //변경될 문자열에 태그를 넣는것도 가능하다
+                $('h3').each(function(i,ob){
+                    $(ob).html('<b>변경된</b> <i>문자</i>열');
+                });
+                //text1의 값안에 val()의 값이 들어간다
+                $('#text1').val("값 추가입력");
+            });
+
+            $('#bt5').on('click',function(){
+                // $(this).css('background', 'red');
+                // $(this).css('width', 300);
+                // $(this).css('height', 100);
+                // $(this).css('color', 'blue');
+                $('#div1').html('<p>바꾼내용</p>');
+                $('#div1').css('width', 300);
+                $('#div1').css('height', 100);
+                $('#div1').css('color', 'blue');
+                $('#div1').css('background', 'gray');
+            });
+
+            //위와 같지만 훨씬 코드가 깔끔해짐
+            $('#bt6').on('click',function(){
+                $('#div2').html('<p>바꾼내용</p>');
+                $('#div2').addClass('css1');
+            });
+
+            //위에 바꾼걸 삭제하는 것
+            $('#bt7').on('click',function(){
+                $('#div2').removeClass('css1');
+            });
+
+            //이미지 바꿔주는 함수
+            $('#bt8').on('click', function(){
+                //attr의 뜻은 현재 속성의 상태를 읽어준다
+                //html과 attr의 차이는 tag는 그대로 있고 속성값만 바꾼다
+                //현재 이미지의 경로와 상태를 alert으로 알려준다
+                alert($('#img1').attr('src'));
+                $('#img1').attr('src','../images/img2.jpg');
+            });
+
+        });
+    </script>
+<style> 
+    /* css파일을 미리 만들어 놓는다 */
+    .css1{
+        color : aquamarine;
+        background: grey;
+        width: 300px;
+        height: 100px;
+    }
+</style>
+</head>
+<body>
+    <h1>[ 문서 조작 함수]</h1>
+    <p><input type="button" id="bt1" value="html() 함수"></p>
+    <p><input type="button" id="bt2" value="text() 함수"></p>
+    <p><input type="button" id="bt3" value="val() 함수"></p>
+    <p><input type="button" id="bt4" value="값 변경하기"></p>
+
+    <h3><b>h3</b>태그를 사용한 문자열1</h3>
+    <h3><i>h3</i>태그를 사용한 문자열1</h3>
+    <p><input type="text" id="text1"></p>
+
+    <!-- 배경색 회색, 가로크기 300px 세로크기 100px 글자색 파랑의 단락으로 변경 -->
+    <!-- html태그로 넣고 css함수로 꾸며라 -->
+    <p><input type="button" id="bt5" value="아래 영역 변경하기"></p>
+    <div id="div1">원래 있던 내용</div>
+
+    <p><input type="button" id="bt6" value="아래 영역 변경하기"></p>
+    <div id="div2">원래 있던 내용</div>
+
+    <!-- addClass는 밑에 div에 class="css1" 이걸 붙이는거고 removeClass는 class="" 삭제하는것
+    <div id="div2" class="css1">원래 있던 내용</div> -->
+
+    <p><input type="button" id="bt7" value="div2에서 바꾼내용 지우기"></p>
+
+    <p><input type="button" id="bt8" value="이미지 바꾸기"></p>
+    <div><img src="../images/img1.jpg" id="img1"></div>
+</body>
+</html>

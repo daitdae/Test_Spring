@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;joinForm.html&apos; to &apos;spring5/src/main/resources/templates.memberview&apos;&#x0D;&#x0A;- Original project: &apos;spring5&apos;&#x0D;&#x0A;- Destination element: &apos;spring5/src/main/resources/templates.memberview&apos;&#x0D;&#x0A;- Original element: &apos;joinForm.html&apos;" description="Copy file" destination="/src\/main\/resources=/gradle_scope=/main=/=/gradle_used_by_scope=/main,test=/&lt;templates.memberview" element1="src/main/resources/templates/memberview/joinForm.html" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1675131291377" units="0" version="1.0"/>
+</session>

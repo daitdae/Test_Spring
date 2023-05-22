@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[ Ajax ]</title>
+    <script>
+        //페이지 내의 객체를 하나도 실행할 수 없음 미리 선언해야 하는변수 같은걸 쓸때만 쓰임
+        alert("head:"+ document.getElementById('output'));
+
+        //window.onload = abc; 라고 할때 abc에 괄호가 없으면 함수의 주소 같은거임
+        
+        //함수를 바로 만들어서 실행한다 이러니깐 마지막에 페이지가 다 만들어 진다음 마지막에 실행됨
+        window.onload = function(){
+            alert("onload:"+ document.getElementById('output'));
+            let bt = document.getElementById('bt');
+            bt.onclick = test;
+        }
+
+        //불러주면 그때만 실행
+        function test(){
+            alert("alert로 대화상자 띄우기");
+            console.log("콘솔에 출력");
+        }
+    </script>
+</head>
+<body>
+    <script>
+        //body안에 script를 직접 넣는건 웬만하면 하지말아라
+        alert("body1:"+ document.getElementById('output'));
+    </script>
+
+    <header>
+        <h1>[ JavaScript의 실행]</h1>
+    </header>
+    <section>
+        <p><a href="javascript:test()">함수 호출</a></p>
+        <p><input type="button" value="함수 호출" onclick="test()"></p>
+        <p><input type="button" value="함수 호출2" id="bt"></p>
+        <div id="output">div영역</div>
+    </section>
+
+    <script>
+        alert("body2:"+ document.getElementById('output'))
+    </script>
+</body>
+</html>

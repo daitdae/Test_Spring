@@ -1,0 +1,36 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.softsociety.spring3.dao.PersonDAO">
+
+<insert id="insertPerson" parameterType="Person">
+	INSERT INTO person VALUES(#{idnum},#{name},#{age})
+</insert>
+
+<delete id="deletePerson" parameterType="String">
+	DELETE FROM person WHERE idnum = #{idnum}
+</delete>
+
+<delete id="deletePerson2" parameterType="String">
+	DELETE FROM person WHERE name LIKE '%' || #{name} || '%'
+	<!-- DELETE FROM person WHERE upper(name) LIKE '%' || upper(#{name}) || '%' -->
+</delete>
+
+<select id="selectOne" parameterType="String" resultType="Person">
+	SELECT * FROM person WHERE idnum = #{idnum}
+</select>
+
+<select id="select" resultType="Person" > <!-- 한개가 어떤타입인지가 resulttype 임 여러개면 메서드의 리턴값이 배열로 적어주면 됨-->
+	SELECT * FROM person
+</select>
+
+<!--<update id="update" parameterType="String">
+    UPDATE person SET name=#{name},age=#{age} WHERE idnum=#{idnum}
+	</update> 이건 제대로 했음-->
+
+<update id="updatePerson" parameterType="Person">
+	UPDATE person SET name=#{name},age=#{age} WHERE idnum=#{idnum}
+</update>
+
+</mapper>

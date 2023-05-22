@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;boardMapper.xml&apos; to &apos;ajax/src/main/resources/mapper&apos;&#x0D;&#x0A;- Original project: &apos;spring5&apos;&#x0D;&#x0A;- Destination element: &apos;ajax/src/main/resources/mapper&apos;&#x0D;&#x0A;- Original element: &apos;boardMapper.xml&apos;" description="Copy file" destination="=ajax/src\/main\/resources=/gradle_scope=/main=/=/gradle_used_by_scope=/main,test=/&lt;mapper" element1="src/main/resources/mappers/boardMapper.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1677124258620" units="0" version="1.0"/>
+</session>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http:www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+    <script th:src="@{/js/jquery-3.6.3.js}"></script> 
+    <script>
+        $(document).ready(function(){
+            $('#bt1').on('click',test1);
+            $('#bt2').on('click',test2);
+            $('#bt3').on('click',test3);
+            $('#bt4').on('click',test4);
+        });
+
+        function test1(){
+            let a = [];
+            let b = new Array();
+            let c = new Array(3); //3개가 들어있는배열
+            let d = [10,20,30];
+
+            //alert(d);
+            console.log(d);
+            console.log(c);
+
+            console.log(d[0]);
+            console.log(d.length);
+            d[0] = 99;
+            console.log(d);
+            d[4] = 111;
+            console.log(d);
+            //넣는데 자유롭다
+            d.push(22);
+            console.log(d);
+            d.pop();
+            console.log(d);
+            d.reverse();
+            console.log(d);
+        }
+
+        function test2(){
+            let ar = [4,2,5,4,9];
+            //앞에 요소 하나하나 마다 뒤의 함수가 실행된다 i는 순서 n은 값
+            $.each(ar, function (i, n) {
+               console.log('i = ' +i+', n = '+n); 
+            });
+        }
+
+        function test3(){
+            let ar = ['aaa','bbb','eee','www'];
+            //위의 것과 같은말이다
+            $(ar).each(function (i,n){
+                console.log(n);
+            });
+        }
+        
+        function test4(){
+            //속성이 세개고 멤버변수 이름이 넘, 두번째 멤버변수이름이 id 값은 aaa
+            let ar = [{num:10, id:'aaa',title:'제목1'} //0번데이터
+                     ,{num:20, id:'bbb',title:'제목2'}
+                     ,{num:30, id:'ccc',title:'제목3'}];
+            $.each(ar , function (i,ob){
+                console.log(ob); //ob은 이걸{num:10, id:'aaa',title:'제목1'} 통채로 가르킴
+                console.log(ob.id+','+ob.title); 
+            });
+        }
+            
+
+        
+    </script>
+</head>
+<body>
+    <h1>[ 배 열 ]</h1>
+    <p><input type="button" id="bt1" value="배열사용"></p>
+    <p><input type="button" id="bt2" value="each() 함수1" ></p>
+    <!-- 이런식으로 위에도 온클릭 밑에도 온클릭으로 넣으면 두번씩 찍힌다 -->
+    <!-- <p><input type="button" id="bt2" value="each() 함수1" onclick="test2()"></p>  -->
+    <p><input type="button" id="bt3" value="each() 함수2"></p>
+    <p><input type="button" id="bt4" value="each() 함수 - 객체배열"></p>
+    
+</body>
+</html>

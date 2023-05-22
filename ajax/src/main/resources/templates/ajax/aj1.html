@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+    <script th:src="@{/js/jquery-3.6.3.js}"></script>
+    <script>
+         $(document).ready(function(){
+
+         });
+
+         function test1(){
+            alert('test1 start');
+            $.ajax({
+                //url은 반드시 필요
+                url: 'test1'
+                , type: 'get'
+                // success는 성공하고 돌아왔을때 뭐할건지 함수로 정의 해야한다, 
+                // 콜백함수 가능(함수명만 적는것)
+                , success: function() {
+                    alert('success로 return');
+                }
+                // , error: function() {
+                //     alert('error'); 
+                // }
+
+                // 에러나 석세스 관련 정보가 보고 싶을때는 함수안에 변수 하나만 선언해본다
+                , error: function(e){
+                    //JSON.stringify는 문자열화 시켜줌
+                    alert(JSON.stringify(e));
+                }
+
+            });
+            // start다음 바로 end가 뜨는데 스타트이후 test1의 함수가 서버로 넘어가
+            // 처리되고 있을때 그냥 html은 무시하고 내려가서 이게 먼저뜸
+            // 그래서 무슨 값을 넣어줄때는 success에 넣어줘야함
+            // 에러가 없으면 success쪽 함수로 리턴이 된다(컨트롤러 참고)
+            alert('test1 end');
+         }
+
+         function test2(){
+            $.ajax({
+                url:'test2'
+                ,type:'get'
+                //서버에 파라미터 보낼때 data: {} 사용 (파라미터 : '보낼값')
+                ,data: {str: '클라이언트에서 보내는 값'}
+                //문자열로 받을때는 text 객체로 받을땐 json
+                ,dataType: 'text'
+                //,success: function(){alert('success');}
+
+                //문자열을 전달 받으려면 아무거나 변수 넣으면 됨
+                ,success: function(s){
+                    alert('success'+ s);
+                }
+                ,error: function(){alert('error');}
+            });
+        }
+
+            function test3(){
+                $.ajax({
+                    url:'test3'
+                    ,type:'get'
+                    //,data:{'#in':'#in'} 내가한건데 이래하면 안됨
+                    ,data: {text: $('#in').html()}
+                    ,dataType: 'text'
+                    ,success: function(s){
+                        //$('#out').html(s);
+
+                        //만약 표를 그려서 넣고 싶다면
+                        let tag ='';
+                        tag+='<table><tr><td>'
+                        tag+=s;
+                        tag+= '</td></tr></table>';
+                        $('#out').html(tag);
+                    }
+                    ,error:function(){alert('error');}
+                });
+            }
+
+         
+    </script> 
+</head>
+<body>
+    <h1> [ Ajax 요청 / 응답 ]</h1>
+    <p><a href="javascript:test1()">서버로 Ajax요청 보내기</a></p>
+    <p><a href="javascript:test2()">문자열 보내기 / 받기</a></p>
+
+    <p><a href="javascript:test3()">대문자로 변환</a></p>
+    <div id="in"> abcde </div>
+    <div id="out"></div>
+</body>
+</html>

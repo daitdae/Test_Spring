@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script th:src="@{/js/jquery-3.6.3.js}"></script>
+    <script>
+        $(document).ready(function(){
+            //기존 저장된 리플을 읽어옴 24일 추가
+            init();
+            //저장버튼을 클릭하면 insertComment 함수() 호출
+            $('#bt').click(insertComment);
+     });
+    
+    //모든 리플 읽어오기 24일 추가
+    function init(){
+        $.ajax({
+            url: 'list'
+            ,type:'get'
+            ,dataType:'json'
+            ,success: output
+        });
+    }
+
+    //서버에서 리턴받은 리플목록을 화면에 출력 24일 추가
+    function output(msg){
+        let s = '';
+        $(msg).each(function(i,ob){
+            s += '<p>';
+            s += ob.name;
+            s +=' ';
+            s += ob.text;
+            //여러개의 삭제함수에 똑같은 값을 주기위해 class로 정의
+            //버튼마다 나머지는 같고 num부분만 다른 것
+            s += '<input type= "button" value="삭제" class="delbt" num="'+ob.num+'">';
+            s += '</p>';
+        });
+        
+        $('#listDiv').html(s);
+
+        $('input.delbt').click(deleteComment);
+    }
+
+    //삭제함수 24일 추가
+    function deleteComment(){
+        let n = $(this).attr('num');
+        $.ajax({
+            url: 'deleteComment'
+            ,type: 'get'
+            ,data: {num:n}
+            ,success: function(){
+                alert('삭제되었습니다');
+                
+            }
+            ,error: function(){
+                alert('삭제실패');
+            }
+        })
+    }
+
+    //리플 저장
+    function insertComment(){
+        let name = $('#name').val();
+        let text = $('#text').val();
+
+        $.ajax({    
+            url: 'insertComment'
+            ,type: 'post'
+            ,data: {name: name, text: text}
+            ,success: function(){
+                alert('저장되었습니다');
+            }
+            ,error: function(){
+                alert('저장실패');
+            }
+        });
+    }
+    </script>
+ 
+</head>
+<body>
+    <h1>[ 리플 달기 ]</h1>
+
+    <!-- 리플 작성 폼 -->
+    <form>
+        이름 <input type="text" id="name">
+        내용 <input type="text" id="text">
+            <input type="button" id="bt" value="저장">
+    </form>
+
+    <!-- 리플목록 출력영역 -->
+    <div id = "listDiv">
+
+ 
+</body>
+</html>

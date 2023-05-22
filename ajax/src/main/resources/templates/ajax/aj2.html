@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script th:src="@{/js/jquery-3.6.3.js}"></script>
+    <script>
+         $(document).ready(function(){
+            //submit1을 가져와서 클릭하면 ()의 함수가 실행된다
+            $('#submit1').click(formSubmit1);
+            $('#submit2').click(formSubmit2);
+         });
+
+         function formSubmit1(){
+            alert('aaa');
+            //이름, 나이, 전화번호를 읽어온다(input text에 입력한 내용) 그럴땐 val을 써준다
+            let n = $('#name1').val();
+            let a = $('#age1').val();
+            let p = $('#phone1').val();
+            //유효성 검사(이름 필수, 나이는 숫자로)
+            if(n ==''){
+                alert('이름을 입력하세요');
+                return;
+            } 
+            if(a ==''||isNaN(a)){
+                alert('숫자를 입력하세요');
+                return;
+            }
+            
+            //입력한 내용을 서버로 전송
+            $.ajax({
+                url: 'insert1'
+                ,type: 'post'
+                ,data: {name:n,age:a,phone:p}
+                ,success: function(){
+                    alert('저장성공');
+                }
+                ,error:function(){
+                    alert('저장실패');
+                }
+            });
+            //성공하면 "저장되었습니다" 출력하고 폼 초기화(빈문자열 삽입)
+         }
+
+         function formSubmit2(){
+            $.ajax({
+                url: 'insert1'
+                ,type: 'post'
+                ,data: $('#form2').serialize()
+                ,success: function(){
+                    alert('저장성공');
+                }
+                ,error:function(){
+                    alert('저장실패');
+                }
+            });
+         }
+
+    //서버로부터 객체 받기1
+    //보낼땐 data 받을땐 dataType
+    function getObject1(){
+        $.ajax({
+            url: 'getObject'
+            ,type: 'get'
+            ,dataType:'text'
+            //success:function(서버에서 어떤값 지정해주면 여기서 받음(괄호안에)){}
+            ,success: function(ob){
+                alert(ob);
+                $('#output1').html(ob);
+            }
+            ,error:function(ob){
+                    alert(ob);
+                }
+        });
+    }
+
+    //서버로부터 객체 받기2 
+    function getObject2(){
+        $.ajax({
+            url: 'getObject'
+            ,type:'get'
+            ,dataType: 'json'
+            ,success: function(ob){
+                let s = '<p>'  +ob.name+ '</p>';
+                    s += '<p>' +ob.age+ '</p>';
+                    s += '<p>' +ob.phone+ '</p>';
+                $('#output2').html(s);
+            }
+        });
+    }
+
+    //서버에서 만들어진 배열을 받을 때 
+    function getList(){
+        $.ajax({
+            url: 'getList'
+            ,type:'get'
+            ,dataType: 'json'
+            ,success: function(ob){
+                //배열에 값 넣은걸 테이블로 출력하는 방법
+                let s = '<table>';
+                $(ob).each(function(i,p){
+                    s += '<tr>'
+                    s += '<td>' +p.name+ '</td>'
+                    s += '<td>' +p.age+ '</td>'
+                    s += '<td>' +p.phone+ '</td>'
+                    s += '</tr>'
+                });
+                s+='</table>'
+                $('#output3').html(s);
+            }
+        });
+    }
+
+    //서버로 배열 보내기
+    function sendList(){
+        let ar = ["aaa", "bbb", "ccc", "ddd"];
+        $.ajax({
+            url: 'sendList'
+            ,type:'post'
+            ,data:{ar : ar}
+            //배열을 보낼때에는 traditional이란 걸 사용한다
+            ,traditional: true
+            ,success: function(){
+                alert('success');
+            }
+            ,error: function(){
+                alert('error');
+            }
+        });
+    }
+
+    //서버로 객체배열 보내기 23일 2번 수업
+    function sendObjectList() {
+        //긴 문자열로 만들어서 보내준다
+	let ar = [{name:'aaa',age:11,phone:'1111'}
+			, {name:'bb',age:22,phone:'2222'}
+			, {name:'cc',age:33,phone:'3333'}];
+	
+	$.ajax({
+		url: 'sendObjectList',
+		type: 'post',
+        // 긴 문자열을 잘라주는 코드이다
+		data: {ar : JSON.stringify(ar)},
+		traditional: true,
+		success: function () { alert('success');},
+		error: function () { alert('error');}
+	});
+}
+    
+   
+    </script>
+</head>
+<body>
+    <h1> [ 객체 보내기 / 받기 ] </h1>
+
+    <p> 1. 서버로 각각의 Parameter를 전달</p>
+    <form>
+        이름 <input type="text" id="name1"><br>
+        나이 <input type="number" id="age1"><br>
+        전화 <input type="text" id="phone1"><br>
+             <input type="button" id="submit1" value="저장">
+    </form>
+
+    <p> 2. 폼의 전체 내용을 전송</p>
+    <form id="form2">
+        이름 <input type="text" name="name"><br>
+        나이 <input type="number" name="age"><br>
+        전화 <input type="text" name="phone"><br>
+             <input type="button" id="submit2" value="저장">
+    </form>
+
+    <p><a href="javascript:getObject1()"> 3. vo객체의 값을 문자열로 받기</a></p>
+    <div id="output1"></div>
+
+    <p><a href="javascript:getObject2()"> 4. vo객체의 값을 객체로 받기</a></p>
+    <div id="output2"></div>
+
+    <p><a href="javascript:getList()"> 5. 리스트(배열) 받기</a></p>
+    <div id="output3"></div>
+
+    <p><a href="javascript:sendList()"> 6. 리스트(배열) 보내기</a></p>
+
+    <p><a href="javascript:sendObjectList()"> 7. 객체배열 보내기</a></p>
+    
+</body>
+</html>

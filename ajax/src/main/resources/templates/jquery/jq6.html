@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+    <script th:src="@{/js/jquery-3.6.3.js}"></script>
+    <script>
+           $(function () {
+                let num = 0;
+	            let imageName = ["img5", "img6", "img7", "img8"];
+                $("#img5").click(function() {
+                    if(num == 3) num=0;
+                    else 	     num++;	
+                    $(this).attr("src","../images/"+ imageName[num]+".png");
+                });
+            });	
+    </script>
+</head>
+<body>
+    <div><img src="../images/img5.png" id="img5"></div>
+</body>
+</html>
